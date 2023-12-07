@@ -127,6 +127,7 @@
             // 
             // lbid
             // 
+            this.lbid.Enabled = false;
             this.lbid.Location = new System.Drawing.Point(602, 29);
             this.lbid.Name = "lbid";
             this.lbid.Size = new System.Drawing.Size(140, 22);

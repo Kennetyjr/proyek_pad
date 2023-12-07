@@ -13,9 +13,9 @@ namespace proyekpad
 {
     public partial class Fkategori : Form
     {
-        proyekpadEntities1 ppad = new proyekpadEntities1();
+        proyekpadEntities ppad = new proyekpadEntities();
         int idx = -1;
-        long up = -1;
+        string up = "";
         public Fkategori()
         {
             InitializeComponent();
@@ -23,15 +23,15 @@ namespace proyekpad
 
         private void loaddgv()
         {
-            var ld = from k in ppad.Categories
+            var ld = from k in ppad.CategoryProducts
                      select new
                      {
-                         ID = k.ProdukCategotyID,
-                         Nama_Kategori = k.Name,
+                         ID = k.ProductID,
+                         Nama_Kategori = k.Nama_Product,
                      };
             dataGridView1.DataSource = ld.ToList();
             var temp = dataGridView1.RowCount;
-            lbid.Text = (temp + 1).ToString();
+            lbid.Text = "PID0"+(temp + 1).ToString();
         }
 
         private void btnback_Click(object sender, EventArgs e)
@@ -45,12 +45,12 @@ namespace proyekpad
         {
             if(txtkategori.Text != "")
             {
-                Category newkategori = new Category()
+                CategoryProduct newkategori = new CategoryProduct()
                 {
-                    ProdukCategotyID = int.Parse(lbid.Text),
-                    Name = txtkategori.Text
+                    ProductID = lbid.Text,
+                    Nama_Product = txtkategori.Text
                 };
-                ppad.Categories.Add(newkategori);
+                ppad.CategoryProducts.Add(newkategori);
                 ppad.SaveChanges();
                 loaddgv();
                 txtkategori.Text = "";
@@ -69,16 +69,17 @@ namespace proyekpad
 
         private void btnedit_Click(object sender, EventArgs e)
         {
-            Category updt = ppad.Categories.FirstOrDefault(Category => Category.ProdukCategotyID == up);
-            updt.ProdukCategotyID = int.Parse(lbid.Text);
-            updt.Name = txtkategori.Text;
+            CategoryProduct updt = ppad.CategoryProducts.FirstOrDefault(Category => Category.ProductID == up);
+            updt.ProductID = lbid.Text;
+            updt.Nama_Product = txtkategori.Text;
             ppad.SaveChanges();
             idx = -1;
-            up = -1;
+            up = "";
             loaddgv();
             MessageBox.Show("berhasil update kategori");
             btnedit.Enabled = false;
             btntambah.Enabled = true;
+            btnhapus.Enabled = false;
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -90,14 +91,14 @@ namespace proyekpad
 
             lbid.Text = dataGridView1.Rows[idx].Cells[0].Value.ToString();
             txtkategori.Text = dataGridView1.Rows[idx].Cells[1].Value.ToString();
-            up = Int64.Parse(dataGridView1.Rows[idx].Cells[0].Value.ToString());
+            up = dataGridView1.Rows[idx].Cells[0].Value.ToString();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             btnhapus.Enabled = true;
             idx = e.RowIndex;
-            up = Int64.Parse(dataGridView1.Rows[idx].Cells[0].Value.ToString());
+            up = dataGridView1.Rows[idx].Cells[0].Value.ToString();
             
         }
 
@@ -105,15 +106,16 @@ namespace proyekpad
         {
             if (idx >= 0)
             {
-                Category deleted = ppad.Categories.FirstOrDefault(Category => Category.ProdukCategotyID == up);
-                //Untuk Delete data dari Entity model
-                ppad.Categories.Remove(deleted);
+                CategoryProduct deleted = ppad.CategoryProducts.FirstOrDefault(Category => Category.ProductID == up);
+               
+                ppad.CategoryProducts.Remove(deleted);
                 ppad.SaveChanges();
                 idx = -1;
-                up = -1;
+                up = "";
                 MessageBox.Show("Berhasil hapus kategori");
                 lbid.Text = "";
                 txtkategori.Text = "";
+                btntambah.Enabled = true;
                 btnhapus.Enabled = false;
                 loaddgv();
             }

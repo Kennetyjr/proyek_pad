@@ -12,9 +12,11 @@ namespace proyekpad
     using System;
     using System.Collections.Generic;
     
-    public partial class Category
+    public partial class Product
     {
-        public int ProdukCategotyID { get; set; }
-        public string Name { get; set; }
+        public int ProductID { get; set; }
+        public string Namaproduct { get; set; }
+        public int Price { get; set; }
+        public Nullable<int> stock { get; set; }
     }
 }

@@ -13,10 +13,10 @@ namespace proyekpad
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class proyekpadEntities1 : DbContext
+    public partial class proyekpadEntities : DbContext
     {
-        public proyekpadEntities1()
-            : base("name=proyekpadEntities1")
+        public proyekpadEntities()
+            : base("name=proyekpadEntities")
         {
         }
     
@@ -25,6 +25,9 @@ namespace proyekpad
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<CategoryProduct> CategoryProducts { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
     }
 }

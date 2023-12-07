@@ -1,11 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="proyekpadModelStoreContainer" CdmEntityContainer="proyekpadEntities1">
-    <EntitySetMapping Name="Categories">
-      <EntityTypeMapping TypeName="proyekpadModel.Category">
-        <MappingFragment StoreEntitySet="Category">
-          <ScalarProperty Name="ProdukCategotyID" ColumnName="ProdukCategotyID" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
+  <EntityContainerMapping StorageEntityContainer="proyekpadModelStoreContainer" CdmEntityContainer="proyekpadEntities">
+    <EntitySetMapping Name="CategoryProducts">
+      <EntityTypeMapping TypeName="proyekpadModel.CategoryProduct">
+        <MappingFragment StoreEntitySet="CategoryProduct">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="Nama_Product" ColumnName="Nama_Product" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="proyekpadModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="Nama_Customer" ColumnName="Nama_Customer" />
+          <ScalarProperty Name="Customer_Address" ColumnName="Customer_Address" />
+          <ScalarProperty Name="Nomor_Telpon" ColumnName="Nomor_Telpon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="proyekpadModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="Nama_Employee" ColumnName="Nama_Employee" />
+          <ScalarProperty Name="Password_Employee" ColumnName="Password_Employee" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="proyekpadModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="Namaproduct" ColumnName="Namaproduct" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="stock" ColumnName="stock" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
