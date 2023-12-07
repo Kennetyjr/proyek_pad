@@ -55,35 +55,56 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Address.cs">
+    <Compile Include="Category.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="AddressType.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BusinessEntity.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BusinessEntityAddress.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BusinessEntityContact.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ContactType.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CountryRegion.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EmailAddress.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Fcustomer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Fcustomer.Designer.cs">
+      <DependentUpon>Fcustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fkategori.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fkategori.Designer.cs">
+      <DependentUpon>Fkategori.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flogin.Designer.cs">
+      <DependentUpon>Flogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fmaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fmaster.Designer.cs">
+      <DependentUpon>Fmaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fpegawai.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fpegawai.Designer.cs">
+      <DependentUpon>Fpegawai.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fpenjualan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fpenjualan.Designer.cs">
+      <DependentUpon>Fpenjualan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fproduk.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fproduk.Designer.cs">
+      <DependentUpon>Fproduk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frefill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frefill.Designer.cs">
+      <DependentUpon>Frefill.cs</DependentUpon>
     </Compile>
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -100,25 +121,31 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Password.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Person.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PersonPhone.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PhoneNumberType.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StateProvince.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Fcustomer.resx">
+      <DependentUpon>Fcustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fkategori.resx">
+      <DependentUpon>Fkategori.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flogin.resx">
+      <DependentUpon>Flogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fmaster.resx">
+      <DependentUpon>Fmaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fpegawai.resx">
+      <DependentUpon>Fpegawai.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fpenjualan.resx">
+      <DependentUpon>Fpenjualan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fproduk.resx">
+      <DependentUpon>Fproduk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frefill.resx">
+      <DependentUpon>Frefill.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -151,19 +178,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
