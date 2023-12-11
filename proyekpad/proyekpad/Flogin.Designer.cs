@@ -39,9 +39,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(220, 197);
+            this.label1.Location = new System.Drawing.Point(165, 160);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 25);
+            this.label1.Size = new System.Drawing.Size(91, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Username :";
             // 
@@ -49,45 +50,52 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(224, 256);
+            this.label2.Location = new System.Drawing.Point(168, 208);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(109, 25);
+            this.label2.Size = new System.Drawing.Size(86, 20);
             this.label2.TabIndex = 0;
             this.label2.Text = "Password :";
             // 
             // txtusername
             // 
-            this.txtusername.Location = new System.Drawing.Point(339, 200);
+            this.txtusername.Location = new System.Drawing.Point(254, 162);
+            this.txtusername.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtusername.Name = "txtusername";
-            this.txtusername.Size = new System.Drawing.Size(192, 22);
+            this.txtusername.Size = new System.Drawing.Size(145, 20);
             this.txtusername.TabIndex = 1;
+            this.txtusername.TextChanged += new System.EventHandler(this.txtusername_TextChanged);
             // 
             // txtpassword
             // 
-            this.txtpassword.Location = new System.Drawing.Point(339, 260);
+            this.txtpassword.Location = new System.Drawing.Point(254, 211);
+            this.txtpassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtpassword.Name = "txtpassword";
-            this.txtpassword.Size = new System.Drawing.Size(192, 22);
+            this.txtpassword.Size = new System.Drawing.Size(145, 20);
             this.txtpassword.TabIndex = 1;
+            this.txtpassword.TextChanged += new System.EventHandler(this.txtpassword_TextChanged);
             // 
             // btnlogin
             // 
-            this.btnlogin.Location = new System.Drawing.Point(339, 364);
+            this.btnlogin.Location = new System.Drawing.Point(254, 296);
+            this.btnlogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnlogin.Name = "btnlogin";
-            this.btnlogin.Size = new System.Drawing.Size(103, 35);
+            this.btnlogin.Size = new System.Drawing.Size(77, 28);
             this.btnlogin.TabIndex = 2;
             this.btnlogin.Text = "Login";
             this.btnlogin.UseVisualStyleBackColor = true;
             // 
             // Flogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(935, 554);
+            this.ClientSize = new System.Drawing.Size(701, 450);
             this.Controls.Add(this.btnlogin);
             this.Controls.Add(this.txtpassword);
             this.Controls.Add(this.txtusername);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Flogin";
             this.Text = "Flogin";
             this.Load += new System.EventHandler(this.Flogin_Load);

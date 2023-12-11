@@ -129,5 +129,21 @@ namespace proyekpad
         {
             Close();
         }
+
+        private void lbid_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtkategori_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            txtkategori.Clear();    
+            lbid.Clear();
+        }
     }
 }

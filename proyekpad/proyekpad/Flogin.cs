@@ -21,5 +21,15 @@ namespace proyekpad
         {
 
         }
+
+        private void txtpassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtusername_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
