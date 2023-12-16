@@ -4,133 +4,1080 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="proyekpadModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="CategoryProduct">
+    <Schema Namespace="db_toko_alat_musikModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="alatmusik">
           <Key>
-            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="al_id" />
           </Key>
-          <Property Name="ProductID" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Nama_Product" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="al_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="al_name" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="al_description" Type="varchar" MaxLength="1024" Nullable="false" />
+          <Property Name="al_price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="al_stock" Type="int" Nullable="false" />
+          <Property Name="al_status" Type="int" Nullable="false" />
+          <Property Name="al_br_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="al_in_id" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
-        <EntityType Name="Customer">
+        <EntityType Name="brand">
           <Key>
-            <PropertyRef Name="CustomerID" />
+            <PropertyRef Name="br_id" />
           </Key>
-          <Property Name="CustomerID" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Nama_Customer" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Customer_Address" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Nomor_Telpon" Type="int" Nullable="false" />
+          <Property Name="br_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="br_name" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <EntityType Name="Employee">
+        <EntityType Name="color">
           <Key>
-            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="co_id" />
           </Key>
-          <Property Name="EmployeeID" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Nama_Employee" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password_Employee" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Gender" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="co_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="co_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="co_hex" Type="varchar" MaxLength="6" Nullable="false" />
         </EntityType>
-        <EntityType Name="Product">
+        <EntityType Name="discount">
           <Key>
-            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="di_id" />
           </Key>
-          <Property Name="ProductID" Type="int" Nullable="false" />
-          <Property Name="Namaproduct" Type="nchar" MaxLength="50" Nullable="false" />
-          <Property Name="Price" Type="int" Nullable="false" />
-          <Property Name="stock" Type="int" />
+          <Property Name="di_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="di_nama" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="di_value" Type="float" Nullable="false" />
+          <Property Name="di_type" Type="int" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="proyekpadModelStoreContainer">
-          <EntitySet Name="CategoryProduct" EntityType="Self.CategoryProduct" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+        <EntityType Name="dtrans_beli">
+          <Key>
+            <PropertyRef Name="db_id" />
+          </Key>
+          <Property Name="db_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="db_va_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="db_amount" Type="int" Nullable="false" />
+          <Property Name="db_hb_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="db_subtotal" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dtrans_service">
+          <Key>
+            <PropertyRef Name="ds_id" />
+          </Key>
+          <Property Name="ds_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="ds_se_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="ds_hs_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="ds_subtotal" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="htrans_beli">
+          <Key>
+            <PropertyRef Name="hb_id" />
+          </Key>
+          <Property Name="hb_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="hb_date" Type="date" Nullable="false" />
+          <Property Name="hb_invoice_number" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="hb_total" Type="float" Nullable="false" />
+          <Property Name="hb_customerid" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="hb_status" Type="int" Nullable="false" />
+          <Property Name="hb_employeeid" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="hb_di_id" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="htrans_service">
+          <Key>
+            <PropertyRef Name="hs_id" />
+          </Key>
+          <Property Name="hs_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="hs_date" Type="date" Nullable="false" />
+          <Property Name="hs_invoice_number" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="hs_total" Type="float" Nullable="false" />
+          <Property Name="hs_customerid" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="hs_status" Type="int" Nullable="false" />
+          <Property Name="hs_employeeid" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="hs_di_id" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="instrument">
+          <Key>
+            <PropertyRef Name="in_id" />
+          </Key>
+          <Property Name="in_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="in_name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="review">
+          <Key>
+            <PropertyRef Name="re_id" />
+          </Key>
+          <Property Name="re_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="re_description" Type="varchar" MaxLength="500" />
+          <Property Name="re_rating" Type="int" Nullable="false" />
+          <Property Name="re_al_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="re_us_id" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="service">
+          <Key>
+            <PropertyRef Name="se_id" />
+          </Key>
+          <Property Name="se_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="se_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="se_price" Type="float" Nullable="false" />
+          <Property Name="se_sc_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="se_in_id" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="service_category">
+          <Key>
+            <PropertyRef Name="sc_id" />
+          </Key>
+          <Property Name="sc_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="sc_name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="us_id" />
+          </Key>
+          <Property Name="us_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="us_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="us_username" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="us_password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="us_dateofbirth" Type="date" Nullable="false" />
+          <Property Name="us_status" Type="int" Nullable="false" />
+          <Property Name="us_priv" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="variant">
+          <Key>
+            <PropertyRef Name="va_id" />
+          </Key>
+          <Property Name="va_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="va_al_id" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="va_co_id" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__alatmusik__al_br__5070F446">
+          <End Role="brand" Type="Self.brand" Multiplicity="1" />
+          <End Role="alatmusik" Type="Self.alatmusik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="brand">
+              <PropertyRef Name="br_id" />
+            </Principal>
+            <Dependent Role="alatmusik">
+              <PropertyRef Name="al_br_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__alatmusik__al_in__5165187F">
+          <End Role="instrument" Type="Self.instrument" Multiplicity="1" />
+          <End Role="alatmusik" Type="Self.alatmusik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="instrument">
+              <PropertyRef Name="in_id" />
+            </Principal>
+            <Dependent Role="alatmusik">
+              <PropertyRef Name="al_in_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKALATMUSIK_REVIEW">
+          <End Role="alatmusik" Type="Self.alatmusik" Multiplicity="1" />
+          <End Role="review" Type="Self.review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="alatmusik">
+              <PropertyRef Name="al_id" />
+            </Principal>
+            <Dependent Role="review">
+              <PropertyRef Name="re_al_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKALATMUSIK_VARIANT">
+          <End Role="alatmusik" Type="Self.alatmusik" Multiplicity="1" />
+          <End Role="variant" Type="Self.variant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="alatmusik">
+              <PropertyRef Name="al_id" />
+            </Principal>
+            <Dependent Role="variant">
+              <PropertyRef Name="va_al_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCATEGORY_SERVICE">
+          <End Role="service_category" Type="Self.service_category" Multiplicity="1" />
+          <End Role="service" Type="Self.service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="service_category">
+              <PropertyRef Name="sc_id" />
+            </Principal>
+            <Dependent Role="service">
+              <PropertyRef Name="se_sc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCOLOR_VARIANT">
+          <End Role="color" Type="Self.color" Multiplicity="1" />
+          <End Role="variant" Type="Self.variant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="color">
+              <PropertyRef Name="co_id" />
+            </Principal>
+            <Dependent Role="variant">
+              <PropertyRef Name="va_co_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCUSTOMER_HTRANSBELI">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="htrans_beli" Type="Self.htrans_beli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="us_id" />
+            </Principal>
+            <Dependent Role="htrans_beli">
+              <PropertyRef Name="hb_customerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCUSTOMER_HTRANSSERVICE">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="htrans_service" Type="Self.htrans_service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="us_id" />
+            </Principal>
+            <Dependent Role="htrans_service">
+              <PropertyRef Name="hs_customerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCUSTOMER_REVIEW">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="review" Type="Self.review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="us_id" />
+            </Principal>
+            <Dependent Role="review">
+              <PropertyRef Name="re_us_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKDISCOUNT_HTRANSBELI">
+          <End Role="discount" Type="Self.discount" Multiplicity="0..1" />
+          <End Role="htrans_beli" Type="Self.htrans_beli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="discount">
+              <PropertyRef Name="di_id" />
+            </Principal>
+            <Dependent Role="htrans_beli">
+              <PropertyRef Name="hb_di_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKDISCOUNT_HTRANSSERVICE">
+          <End Role="discount" Type="Self.discount" Multiplicity="0..1" />
+          <End Role="htrans_service" Type="Self.htrans_service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="discount">
+              <PropertyRef Name="di_id" />
+            </Principal>
+            <Dependent Role="htrans_service">
+              <PropertyRef Name="hs_di_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKEMPLOYEE_HTRANSBELI">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="htrans_beli" Type="Self.htrans_beli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="us_id" />
+            </Principal>
+            <Dependent Role="htrans_beli">
+              <PropertyRef Name="hb_employeeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKEMPLOYEE_HTRANSSERVICE">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="htrans_service" Type="Self.htrans_service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="us_id" />
+            </Principal>
+            <Dependent Role="htrans_service">
+              <PropertyRef Name="hs_employeeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKHTRANS_DTRANSBELI">
+          <End Role="htrans_beli" Type="Self.htrans_beli" Multiplicity="1" />
+          <End Role="dtrans_beli" Type="Self.dtrans_beli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="htrans_beli">
+              <PropertyRef Name="hb_id" />
+            </Principal>
+            <Dependent Role="dtrans_beli">
+              <PropertyRef Name="db_hb_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKHTRANS_DTTRANSSERVICE">
+          <End Role="htrans_service" Type="Self.htrans_service" Multiplicity="1" />
+          <End Role="dtrans_service" Type="Self.dtrans_service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="htrans_service">
+              <PropertyRef Name="hs_id" />
+            </Principal>
+            <Dependent Role="dtrans_service">
+              <PropertyRef Name="ds_hs_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKINSTRUMENT_SERVICE">
+          <End Role="instrument" Type="Self.instrument" Multiplicity="1" />
+          <End Role="service" Type="Self.service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="instrument">
+              <PropertyRef Name="in_id" />
+            </Principal>
+            <Dependent Role="service">
+              <PropertyRef Name="se_in_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSERVICE_DTRANSSERVICE">
+          <End Role="service" Type="Self.service" Multiplicity="1" />
+          <End Role="dtrans_service" Type="Self.dtrans_service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="service">
+              <PropertyRef Name="se_id" />
+            </Principal>
+            <Dependent Role="dtrans_service">
+              <PropertyRef Name="ds_se_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKVARIANT_DTRANSBELI">
+          <End Role="variant" Type="Self.variant" Multiplicity="1" />
+          <End Role="dtrans_beli" Type="Self.dtrans_beli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="variant">
+              <PropertyRef Name="va_id" />
+            </Principal>
+            <Dependent Role="dtrans_beli">
+              <PropertyRef Name="db_va_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_toko_alat_musikModelStoreContainer">
+          <EntitySet Name="alatmusik" EntityType="Self.alatmusik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="brand" EntityType="Self.brand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="color" EntityType="Self.color" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="discount" EntityType="Self.discount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dtrans_beli" EntityType="Self.dtrans_beli" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dtrans_service" EntityType="Self.dtrans_service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="htrans_beli" EntityType="Self.htrans_beli" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="htrans_service" EntityType="Self.htrans_service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="instrument" EntityType="Self.instrument" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="review" EntityType="Self.review" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="service" EntityType="Self.service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="service_category" EntityType="Self.service_category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="variant" EntityType="Self.variant" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__alatmusik__al_br__5070F446" Association="Self.FK__alatmusik__al_br__5070F446">
+            <End Role="brand" EntitySet="brand" />
+            <End Role="alatmusik" EntitySet="alatmusik" />
+          </AssociationSet>
+          <AssociationSet Name="FK__alatmusik__al_in__5165187F" Association="Self.FK__alatmusik__al_in__5165187F">
+            <End Role="instrument" EntitySet="instrument" />
+            <End Role="alatmusik" EntitySet="alatmusik" />
+          </AssociationSet>
+          <AssociationSet Name="FKALATMUSIK_REVIEW" Association="Self.FKALATMUSIK_REVIEW">
+            <End Role="alatmusik" EntitySet="alatmusik" />
+            <End Role="review" EntitySet="review" />
+          </AssociationSet>
+          <AssociationSet Name="FKALATMUSIK_VARIANT" Association="Self.FKALATMUSIK_VARIANT">
+            <End Role="alatmusik" EntitySet="alatmusik" />
+            <End Role="variant" EntitySet="variant" />
+          </AssociationSet>
+          <AssociationSet Name="FKCATEGORY_SERVICE" Association="Self.FKCATEGORY_SERVICE">
+            <End Role="service_category" EntitySet="service_category" />
+            <End Role="service" EntitySet="service" />
+          </AssociationSet>
+          <AssociationSet Name="FKCOLOR_VARIANT" Association="Self.FKCOLOR_VARIANT">
+            <End Role="color" EntitySet="color" />
+            <End Role="variant" EntitySet="variant" />
+          </AssociationSet>
+          <AssociationSet Name="FKCUSTOMER_HTRANSBELI" Association="Self.FKCUSTOMER_HTRANSBELI">
+            <End Role="users" EntitySet="users" />
+            <End Role="htrans_beli" EntitySet="htrans_beli" />
+          </AssociationSet>
+          <AssociationSet Name="FKCUSTOMER_HTRANSSERVICE" Association="Self.FKCUSTOMER_HTRANSSERVICE">
+            <End Role="users" EntitySet="users" />
+            <End Role="htrans_service" EntitySet="htrans_service" />
+          </AssociationSet>
+          <AssociationSet Name="FKCUSTOMER_REVIEW" Association="Self.FKCUSTOMER_REVIEW">
+            <End Role="users" EntitySet="users" />
+            <End Role="review" EntitySet="review" />
+          </AssociationSet>
+          <AssociationSet Name="FKDISCOUNT_HTRANSBELI" Association="Self.FKDISCOUNT_HTRANSBELI">
+            <End Role="discount" EntitySet="discount" />
+            <End Role="htrans_beli" EntitySet="htrans_beli" />
+          </AssociationSet>
+          <AssociationSet Name="FKDISCOUNT_HTRANSSERVICE" Association="Self.FKDISCOUNT_HTRANSSERVICE">
+            <End Role="discount" EntitySet="discount" />
+            <End Role="htrans_service" EntitySet="htrans_service" />
+          </AssociationSet>
+          <AssociationSet Name="FKEMPLOYEE_HTRANSBELI" Association="Self.FKEMPLOYEE_HTRANSBELI">
+            <End Role="users" EntitySet="users" />
+            <End Role="htrans_beli" EntitySet="htrans_beli" />
+          </AssociationSet>
+          <AssociationSet Name="FKEMPLOYEE_HTRANSSERVICE" Association="Self.FKEMPLOYEE_HTRANSSERVICE">
+            <End Role="users" EntitySet="users" />
+            <End Role="htrans_service" EntitySet="htrans_service" />
+          </AssociationSet>
+          <AssociationSet Name="FKHTRANS_DTRANSBELI" Association="Self.FKHTRANS_DTRANSBELI">
+            <End Role="htrans_beli" EntitySet="htrans_beli" />
+            <End Role="dtrans_beli" EntitySet="dtrans_beli" />
+          </AssociationSet>
+          <AssociationSet Name="FKHTRANS_DTTRANSSERVICE" Association="Self.FKHTRANS_DTTRANSSERVICE">
+            <End Role="htrans_service" EntitySet="htrans_service" />
+            <End Role="dtrans_service" EntitySet="dtrans_service" />
+          </AssociationSet>
+          <AssociationSet Name="FKINSTRUMENT_SERVICE" Association="Self.FKINSTRUMENT_SERVICE">
+            <End Role="instrument" EntitySet="instrument" />
+            <End Role="service" EntitySet="service" />
+          </AssociationSet>
+          <AssociationSet Name="FKSERVICE_DTRANSSERVICE" Association="Self.FKSERVICE_DTRANSSERVICE">
+            <End Role="service" EntitySet="service" />
+            <End Role="dtrans_service" EntitySet="dtrans_service" />
+          </AssociationSet>
+          <AssociationSet Name="FKVARIANT_DTRANSBELI" Association="Self.FKVARIANT_DTRANSBELI">
+            <End Role="variant" EntitySet="variant" />
+            <End Role="dtrans_beli" EntitySet="dtrans_beli" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="proyekpadModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="CategoryProduct">
+      <Schema Namespace="db_toko_alat_musikModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="alatmusik">
           <Key>
-            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="al_id" />
           </Key>
-          <Property Name="ProductID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Nama_Product" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="al_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="al_name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="al_description" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="al_price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="al_stock" Type="Int32" Nullable="false" />
+          <Property Name="al_status" Type="Int32" Nullable="false" />
+          <Property Name="al_br_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="al_in_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="brand" Relationship="Self.FK__alatmusik__al_br__31EC6D26" FromRole="alatmusik" ToRole="brand" />
+          <NavigationProperty Name="instrument" Relationship="Self.FK__alatmusik__al_in__32E0915F" FromRole="alatmusik" ToRole="instrument" />
+          <NavigationProperty Name="reviews" Relationship="Self.FKALATMUSIK_REVIEW" FromRole="alatmusik" ToRole="review" />
+          <NavigationProperty Name="variants" Relationship="Self.FKALATMUSIK_VARIANT" FromRole="alatmusik" ToRole="variant" />
         </EntityType>
-        <EntityType Name="Customer">
+        <EntityType Name="brand">
           <Key>
-            <PropertyRef Name="CustomerID" />
+            <PropertyRef Name="br_id" />
           </Key>
-          <Property Name="CustomerID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Nama_Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Customer_Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Nomor_Telpon" Type="Int32" Nullable="false" />
+          <Property Name="br_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="br_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="alatmusiks" Relationship="Self.FK__alatmusik__al_br__31EC6D26" FromRole="brand" ToRole="alatmusik" />
         </EntityType>
-        <EntityType Name="Employee">
+        <EntityType Name="color">
           <Key>
-            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="co_id" />
           </Key>
-          <Property Name="EmployeeID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Nama_Employee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password_Employee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="co_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="co_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="co_hex" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="variants" Relationship="Self.FKCOLOR_VARIANT" FromRole="color" ToRole="variant" />
         </EntityType>
-        <EntityType Name="Product">
+        <EntityType Name="discount">
           <Key>
-            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="di_id" />
           </Key>
-          <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="Namaproduct" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Price" Type="Int32" Nullable="false" />
-          <Property Name="stock" Type="Int32" />
+          <Property Name="di_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="di_nama" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="di_value" Type="Double" Nullable="false" />
+          <Property Name="di_type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="htrans_beli" Relationship="Self.FKDISCOUNT_HTRANSBELI" FromRole="discount" ToRole="htrans_beli" />
+          <NavigationProperty Name="htrans_service" Relationship="Self.FKDISCOUNT_HTRANSSERVICE" FromRole="discount" ToRole="htrans_service" />
         </EntityType>
-        <EntityContainer Name="proyekpadEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CategoryProducts" EntityType="Self.CategoryProduct" />
-          <EntitySet Name="Customers" EntityType="Self.Customer" />
-          <EntitySet Name="Employees" EntityType="Self.Employee" />
-          <EntitySet Name="Products" EntityType="Self.Product" />
+        <EntityType Name="dtrans_beli">
+          <Key>
+            <PropertyRef Name="db_id" />
+          </Key>
+          <Property Name="db_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="db_va_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="db_amount" Type="Int32" Nullable="false" />
+          <Property Name="db_hb_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="db_subtotal" Type="Double" Nullable="false" />
+          <NavigationProperty Name="htrans_beli" Relationship="Self.FKHTRANS_DTRANSBELI" FromRole="dtrans_beli" ToRole="htrans_beli" />
+          <NavigationProperty Name="variant" Relationship="Self.FKVARIANT_DTRANSBELI" FromRole="dtrans_beli" ToRole="variant" />
+        </EntityType>
+        <EntityType Name="dtrans_service">
+          <Key>
+            <PropertyRef Name="ds_id" />
+          </Key>
+          <Property Name="ds_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ds_se_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ds_hs_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ds_subtotal" Type="Double" Nullable="false" />
+          <NavigationProperty Name="htrans_service" Relationship="Self.FKHTRANS_DTTRANSSERVICE" FromRole="dtrans_service" ToRole="htrans_service" />
+          <NavigationProperty Name="service" Relationship="Self.FKSERVICE_DTRANSSERVICE" FromRole="dtrans_service" ToRole="service" />
+        </EntityType>
+        <EntityType Name="htrans_beli">
+          <Key>
+            <PropertyRef Name="hb_id" />
+          </Key>
+          <Property Name="hb_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hb_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hb_invoice_number" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hb_total" Type="Double" Nullable="false" />
+          <Property Name="hb_customerid" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hb_status" Type="Int32" Nullable="false" />
+          <Property Name="hb_employeeid" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hb_di_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="discount" Relationship="Self.FKDISCOUNT_HTRANSBELI" FromRole="htrans_beli" ToRole="discount" />
+          <NavigationProperty Name="dtrans_beli" Relationship="Self.FKHTRANS_DTRANSBELI" FromRole="htrans_beli" ToRole="dtrans_beli" />
+          <NavigationProperty Name="user" Relationship="Self.FKCUSTOMER_HTRANSBELI" FromRole="htrans_beli" ToRole="users" />
+          <NavigationProperty Name="user1" Relationship="Self.FKEMPLOYEE_HTRANSBELI" FromRole="htrans_beli" ToRole="users" />
+        </EntityType>
+        <EntityType Name="htrans_service">
+          <Key>
+            <PropertyRef Name="hs_id" />
+          </Key>
+          <Property Name="hs_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hs_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hs_invoice_number" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hs_total" Type="Double" Nullable="false" />
+          <Property Name="hs_customerid" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hs_status" Type="Int32" Nullable="false" />
+          <Property Name="hs_employeeid" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hs_di_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="discount" Relationship="Self.FKDISCOUNT_HTRANSSERVICE" FromRole="htrans_service" ToRole="discount" />
+          <NavigationProperty Name="dtrans_service" Relationship="Self.FKHTRANS_DTTRANSSERVICE" FromRole="htrans_service" ToRole="dtrans_service" />
+          <NavigationProperty Name="user" Relationship="Self.FKCUSTOMER_HTRANSSERVICE" FromRole="htrans_service" ToRole="users" />
+          <NavigationProperty Name="user1" Relationship="Self.FKEMPLOYEE_HTRANSSERVICE" FromRole="htrans_service" ToRole="users" />
+        </EntityType>
+        <EntityType Name="instrument">
+          <Key>
+            <PropertyRef Name="in_id" />
+          </Key>
+          <Property Name="in_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="in_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="alatmusiks" Relationship="Self.FK__alatmusik__al_in__32E0915F" FromRole="instrument" ToRole="alatmusik" />
+          <NavigationProperty Name="services" Relationship="Self.FKINSTRUMENT_SERVICE" FromRole="instrument" ToRole="service" />
+        </EntityType>
+        <EntityType Name="review">
+          <Key>
+            <PropertyRef Name="re_id" />
+          </Key>
+          <Property Name="re_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="re_description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="re_rating" Type="Int32" Nullable="false" />
+          <Property Name="re_al_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="re_us_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="alatmusik" Relationship="Self.FKALATMUSIK_REVIEW" FromRole="review" ToRole="alatmusik" />
+          <NavigationProperty Name="user" Relationship="Self.FKCUSTOMER_REVIEW" FromRole="review" ToRole="users" />
+        </EntityType>
+        <EntityType Name="service">
+          <Key>
+            <PropertyRef Name="se_id" />
+          </Key>
+          <Property Name="se_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="se_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="se_price" Type="Double" Nullable="false" />
+          <Property Name="se_sc_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="se_in_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="dtrans_service" Relationship="Self.FKSERVICE_DTRANSSERVICE" FromRole="service" ToRole="dtrans_service" />
+          <NavigationProperty Name="instrument" Relationship="Self.FKINSTRUMENT_SERVICE" FromRole="service" ToRole="instrument" />
+          <NavigationProperty Name="service_category" Relationship="Self.FKCATEGORY_SERVICE" FromRole="service" ToRole="service_category" />
+        </EntityType>
+        <EntityType Name="service_category">
+          <Key>
+            <PropertyRef Name="sc_id" />
+          </Key>
+          <Property Name="sc_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sc_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="services" Relationship="Self.FKCATEGORY_SERVICE" FromRole="service_category" ToRole="service" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="us_id" />
+          </Key>
+          <Property Name="us_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="us_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="us_username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="us_password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="us_dateofbirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="us_status" Type="Int32" Nullable="false" />
+          <Property Name="us_priv" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="htrans_beli" Relationship="Self.FKCUSTOMER_HTRANSBELI" FromRole="users" ToRole="htrans_beli" />
+          <NavigationProperty Name="htrans_beli1" Relationship="Self.FKEMPLOYEE_HTRANSBELI" FromRole="users" ToRole="htrans_beli" />
+          <NavigationProperty Name="htrans_service" Relationship="Self.FKCUSTOMER_HTRANSSERVICE" FromRole="users" ToRole="htrans_service" />
+          <NavigationProperty Name="htrans_service1" Relationship="Self.FKEMPLOYEE_HTRANSSERVICE" FromRole="users" ToRole="htrans_service" />
+          <NavigationProperty Name="reviews" Relationship="Self.FKCUSTOMER_REVIEW" FromRole="users" ToRole="review" />
+        </EntityType>
+        <EntityType Name="variant">
+          <Key>
+            <PropertyRef Name="va_id" />
+          </Key>
+          <Property Name="va_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="va_al_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="va_co_id" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="alatmusik" Relationship="Self.FKALATMUSIK_VARIANT" FromRole="variant" ToRole="alatmusik" />
+          <NavigationProperty Name="color" Relationship="Self.FKCOLOR_VARIANT" FromRole="variant" ToRole="color" />
+          <NavigationProperty Name="dtrans_beli" Relationship="Self.FKVARIANT_DTRANSBELI" FromRole="variant" ToRole="dtrans_beli" />
+        </EntityType>
+        <Association Name="FK__alatmusik__al_br__31EC6D26">
+          <End Role="brand" Type="Self.brand" Multiplicity="1" />
+          <End Role="alatmusik" Type="Self.alatmusik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="brand">
+              <PropertyRef Name="br_id" />
+            </Principal>
+            <Dependent Role="alatmusik">
+              <PropertyRef Name="al_br_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__alatmusik__al_in__32E0915F">
+          <End Role="instrument" Type="Self.instrument" Multiplicity="1" />
+          <End Role="alatmusik" Type="Self.alatmusik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="instrument">
+              <PropertyRef Name="in_id" />
+            </Principal>
+            <Dependent Role="alatmusik">
+              <PropertyRef Name="al_in_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKALATMUSIK_REVIEW">
+          <End Role="alatmusik" Type="Self.alatmusik" Multiplicity="1" />
+          <End Role="review" Type="Self.review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="alatmusik">
+              <PropertyRef Name="al_id" />
+            </Principal>
+            <Dependent Role="review">
+              <PropertyRef Name="re_al_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKALATMUSIK_VARIANT">
+          <End Role="alatmusik" Type="Self.alatmusik" Multiplicity="1" />
+          <End Role="variant" Type="Self.variant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="alatmusik">
+              <PropertyRef Name="al_id" />
+            </Principal>
+            <Dependent Role="variant">
+              <PropertyRef Name="va_al_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCOLOR_VARIANT">
+          <End Role="color" Type="Self.color" Multiplicity="1" />
+          <End Role="variant" Type="Self.variant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="color">
+              <PropertyRef Name="co_id" />
+            </Principal>
+            <Dependent Role="variant">
+              <PropertyRef Name="va_co_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKDISCOUNT_HTRANSBELI">
+          <End Role="discount" Type="Self.discount" Multiplicity="0..1" />
+          <End Role="htrans_beli" Type="Self.htrans_beli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="discount">
+              <PropertyRef Name="di_id" />
+            </Principal>
+            <Dependent Role="htrans_beli">
+              <PropertyRef Name="hb_di_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKDISCOUNT_HTRANSSERVICE">
+          <End Role="discount" Type="Self.discount" Multiplicity="0..1" />
+          <End Role="htrans_service" Type="Self.htrans_service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="discount">
+              <PropertyRef Name="di_id" />
+            </Principal>
+            <Dependent Role="htrans_service">
+              <PropertyRef Name="hs_di_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKHTRANS_DTRANSBELI">
+          <End Role="htrans_beli" Type="Self.htrans_beli" Multiplicity="1" />
+          <End Role="dtrans_beli" Type="Self.dtrans_beli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="htrans_beli">
+              <PropertyRef Name="hb_id" />
+            </Principal>
+            <Dependent Role="dtrans_beli">
+              <PropertyRef Name="db_hb_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKVARIANT_DTRANSBELI">
+          <End Role="variant" Type="Self.variant" Multiplicity="1" />
+          <End Role="dtrans_beli" Type="Self.dtrans_beli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="variant">
+              <PropertyRef Name="va_id" />
+            </Principal>
+            <Dependent Role="dtrans_beli">
+              <PropertyRef Name="db_va_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKHTRANS_DTTRANSSERVICE">
+          <End Role="htrans_service" Type="Self.htrans_service" Multiplicity="1" />
+          <End Role="dtrans_service" Type="Self.dtrans_service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="htrans_service">
+              <PropertyRef Name="hs_id" />
+            </Principal>
+            <Dependent Role="dtrans_service">
+              <PropertyRef Name="ds_hs_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSERVICE_DTRANSSERVICE">
+          <End Role="service" Type="Self.service" Multiplicity="1" />
+          <End Role="dtrans_service" Type="Self.dtrans_service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="service">
+              <PropertyRef Name="se_id" />
+            </Principal>
+            <Dependent Role="dtrans_service">
+              <PropertyRef Name="ds_se_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCUSTOMER_HTRANSBELI">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="htrans_beli" Type="Self.htrans_beli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="us_id" />
+            </Principal>
+            <Dependent Role="htrans_beli">
+              <PropertyRef Name="hb_customerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKEMPLOYEE_HTRANSBELI">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="htrans_beli" Type="Self.htrans_beli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="us_id" />
+            </Principal>
+            <Dependent Role="htrans_beli">
+              <PropertyRef Name="hb_employeeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCUSTOMER_HTRANSSERVICE">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="htrans_service" Type="Self.htrans_service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="us_id" />
+            </Principal>
+            <Dependent Role="htrans_service">
+              <PropertyRef Name="hs_customerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKEMPLOYEE_HTRANSSERVICE">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="htrans_service" Type="Self.htrans_service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="us_id" />
+            </Principal>
+            <Dependent Role="htrans_service">
+              <PropertyRef Name="hs_employeeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKINSTRUMENT_SERVICE">
+          <End Role="instrument" Type="Self.instrument" Multiplicity="1" />
+          <End Role="service" Type="Self.service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="instrument">
+              <PropertyRef Name="in_id" />
+            </Principal>
+            <Dependent Role="service">
+              <PropertyRef Name="se_in_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCUSTOMER_REVIEW">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="review" Type="Self.review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="us_id" />
+            </Principal>
+            <Dependent Role="review">
+              <PropertyRef Name="re_us_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCATEGORY_SERVICE">
+          <End Role="service_category" Type="Self.service_category" Multiplicity="1" />
+          <End Role="service" Type="Self.service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="service_category">
+              <PropertyRef Name="sc_id" />
+            </Principal>
+            <Dependent Role="service">
+              <PropertyRef Name="se_sc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_toko_alat_musikEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="alatmusiks" EntityType="Self.alatmusik" />
+          <EntitySet Name="brands" EntityType="Self.brand" />
+          <EntitySet Name="colors" EntityType="Self.color" />
+          <EntitySet Name="discounts" EntityType="Self.discount" />
+          <EntitySet Name="dtrans_beli" EntityType="Self.dtrans_beli" />
+          <EntitySet Name="dtrans_service" EntityType="Self.dtrans_service" />
+          <EntitySet Name="htrans_beli" EntityType="Self.htrans_beli" />
+          <EntitySet Name="htrans_service" EntityType="Self.htrans_service" />
+          <EntitySet Name="instruments" EntityType="Self.instrument" />
+          <EntitySet Name="reviews" EntityType="Self.review" />
+          <EntitySet Name="services" EntityType="Self.service" />
+          <EntitySet Name="service_category" EntityType="Self.service_category" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="variants" EntityType="Self.variant" />
+          <AssociationSet Name="FK__alatmusik__al_br__31EC6D26" Association="Self.FK__alatmusik__al_br__31EC6D26">
+            <End Role="brand" EntitySet="brands" />
+            <End Role="alatmusik" EntitySet="alatmusiks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__alatmusik__al_in__32E0915F" Association="Self.FK__alatmusik__al_in__32E0915F">
+            <End Role="instrument" EntitySet="instruments" />
+            <End Role="alatmusik" EntitySet="alatmusiks" />
+          </AssociationSet>
+          <AssociationSet Name="FKALATMUSIK_REVIEW" Association="Self.FKALATMUSIK_REVIEW">
+            <End Role="alatmusik" EntitySet="alatmusiks" />
+            <End Role="review" EntitySet="reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FKALATMUSIK_VARIANT" Association="Self.FKALATMUSIK_VARIANT">
+            <End Role="alatmusik" EntitySet="alatmusiks" />
+            <End Role="variant" EntitySet="variants" />
+          </AssociationSet>
+          <AssociationSet Name="FKCOLOR_VARIANT" Association="Self.FKCOLOR_VARIANT">
+            <End Role="color" EntitySet="colors" />
+            <End Role="variant" EntitySet="variants" />
+          </AssociationSet>
+          <AssociationSet Name="FKDISCOUNT_HTRANSBELI" Association="Self.FKDISCOUNT_HTRANSBELI">
+            <End Role="discount" EntitySet="discounts" />
+            <End Role="htrans_beli" EntitySet="htrans_beli" />
+          </AssociationSet>
+          <AssociationSet Name="FKDISCOUNT_HTRANSSERVICE" Association="Self.FKDISCOUNT_HTRANSSERVICE">
+            <End Role="discount" EntitySet="discounts" />
+            <End Role="htrans_service" EntitySet="htrans_service" />
+          </AssociationSet>
+          <AssociationSet Name="FKHTRANS_DTRANSBELI" Association="Self.FKHTRANS_DTRANSBELI">
+            <End Role="htrans_beli" EntitySet="htrans_beli" />
+            <End Role="dtrans_beli" EntitySet="dtrans_beli" />
+          </AssociationSet>
+          <AssociationSet Name="FKVARIANT_DTRANSBELI" Association="Self.FKVARIANT_DTRANSBELI">
+            <End Role="variant" EntitySet="variants" />
+            <End Role="dtrans_beli" EntitySet="dtrans_beli" />
+          </AssociationSet>
+          <AssociationSet Name="FKHTRANS_DTTRANSSERVICE" Association="Self.FKHTRANS_DTTRANSSERVICE">
+            <End Role="htrans_service" EntitySet="htrans_service" />
+            <End Role="dtrans_service" EntitySet="dtrans_service" />
+          </AssociationSet>
+          <AssociationSet Name="FKSERVICE_DTRANSSERVICE" Association="Self.FKSERVICE_DTRANSSERVICE">
+            <End Role="service" EntitySet="services" />
+            <End Role="dtrans_service" EntitySet="dtrans_service" />
+          </AssociationSet>
+          <AssociationSet Name="FKCUSTOMER_HTRANSBELI" Association="Self.FKCUSTOMER_HTRANSBELI">
+            <End Role="users" EntitySet="users" />
+            <End Role="htrans_beli" EntitySet="htrans_beli" />
+          </AssociationSet>
+          <AssociationSet Name="FKEMPLOYEE_HTRANSBELI" Association="Self.FKEMPLOYEE_HTRANSBELI">
+            <End Role="users" EntitySet="users" />
+            <End Role="htrans_beli" EntitySet="htrans_beli" />
+          </AssociationSet>
+          <AssociationSet Name="FKCUSTOMER_HTRANSSERVICE" Association="Self.FKCUSTOMER_HTRANSSERVICE">
+            <End Role="users" EntitySet="users" />
+            <End Role="htrans_service" EntitySet="htrans_service" />
+          </AssociationSet>
+          <AssociationSet Name="FKEMPLOYEE_HTRANSSERVICE" Association="Self.FKEMPLOYEE_HTRANSSERVICE">
+            <End Role="users" EntitySet="users" />
+            <End Role="htrans_service" EntitySet="htrans_service" />
+          </AssociationSet>
+          <AssociationSet Name="FKINSTRUMENT_SERVICE" Association="Self.FKINSTRUMENT_SERVICE">
+            <End Role="instrument" EntitySet="instruments" />
+            <End Role="service" EntitySet="services" />
+          </AssociationSet>
+          <AssociationSet Name="FKCUSTOMER_REVIEW" Association="Self.FKCUSTOMER_REVIEW">
+            <End Role="users" EntitySet="users" />
+            <End Role="review" EntitySet="reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FKCATEGORY_SERVICE" Association="Self.FKCATEGORY_SERVICE">
+            <End Role="service_category" EntitySet="service_category" />
+            <End Role="service" EntitySet="services" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="proyekpadModelStoreContainer" CdmEntityContainer="proyekpadEntities">
-          <EntitySetMapping Name="CategoryProducts">
-            <EntityTypeMapping TypeName="proyekpadModel.CategoryProduct">
-              <MappingFragment StoreEntitySet="CategoryProduct">
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="Nama_Product" ColumnName="Nama_Product" />
+        <EntityContainerMapping StorageEntityContainer="db_toko_alat_musikModelStoreContainer" CdmEntityContainer="db_toko_alat_musikEntities">
+          <EntitySetMapping Name="alatmusiks">
+            <EntityTypeMapping TypeName="db_toko_alat_musikModel.alatmusik">
+              <MappingFragment StoreEntitySet="alatmusik">
+                <ScalarProperty Name="al_id" ColumnName="al_id" />
+                <ScalarProperty Name="al_name" ColumnName="al_name" />
+                <ScalarProperty Name="al_description" ColumnName="al_description" />
+                <ScalarProperty Name="al_price" ColumnName="al_price" />
+                <ScalarProperty Name="al_stock" ColumnName="al_stock" />
+                <ScalarProperty Name="al_status" ColumnName="al_status" />
+                <ScalarProperty Name="al_br_id" ColumnName="al_br_id" />
+                <ScalarProperty Name="al_in_id" ColumnName="al_in_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="proyekpadModel.Customer">
-              <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="Nama_Customer" ColumnName="Nama_Customer" />
-                <ScalarProperty Name="Customer_Address" ColumnName="Customer_Address" />
-                <ScalarProperty Name="Nomor_Telpon" ColumnName="Nomor_Telpon" />
+          <EntitySetMapping Name="brands">
+            <EntityTypeMapping TypeName="db_toko_alat_musikModel.brand">
+              <MappingFragment StoreEntitySet="brand">
+                <ScalarProperty Name="br_id" ColumnName="br_id" />
+                <ScalarProperty Name="br_name" ColumnName="br_name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="proyekpadModel.Employee">
-              <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="Nama_Employee" ColumnName="Nama_Employee" />
-                <ScalarProperty Name="Password_Employee" ColumnName="Password_Employee" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <EntitySetMapping Name="colors">
+            <EntityTypeMapping TypeName="db_toko_alat_musikModel.color">
+              <MappingFragment StoreEntitySet="color">
+                <ScalarProperty Name="co_id" ColumnName="co_id" />
+                <ScalarProperty Name="co_name" ColumnName="co_name" />
+                <ScalarProperty Name="co_hex" ColumnName="co_hex" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="proyekpadModel.Product">
-              <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="Namaproduct" ColumnName="Namaproduct" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="stock" ColumnName="stock" />
+          <EntitySetMapping Name="discounts">
+            <EntityTypeMapping TypeName="db_toko_alat_musikModel.discount">
+              <MappingFragment StoreEntitySet="discount">
+                <ScalarProperty Name="di_id" ColumnName="di_id" />
+                <ScalarProperty Name="di_nama" ColumnName="di_nama" />
+                <ScalarProperty Name="di_value" ColumnName="di_value" />
+                <ScalarProperty Name="di_type" ColumnName="di_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dtrans_beli">
+            <EntityTypeMapping TypeName="db_toko_alat_musikModel.dtrans_beli">
+              <MappingFragment StoreEntitySet="dtrans_beli">
+                <ScalarProperty Name="db_id" ColumnName="db_id" />
+                <ScalarProperty Name="db_va_id" ColumnName="db_va_id" />
+                <ScalarProperty Name="db_amount" ColumnName="db_amount" />
+                <ScalarProperty Name="db_hb_id" ColumnName="db_hb_id" />
+                <ScalarProperty Name="db_subtotal" ColumnName="db_subtotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dtrans_service">
+            <EntityTypeMapping TypeName="db_toko_alat_musikModel.dtrans_service">
+              <MappingFragment StoreEntitySet="dtrans_service">
+                <ScalarProperty Name="ds_id" ColumnName="ds_id" />
+                <ScalarProperty Name="ds_se_id" ColumnName="ds_se_id" />
+                <ScalarProperty Name="ds_hs_id" ColumnName="ds_hs_id" />
+                <ScalarProperty Name="ds_subtotal" ColumnName="ds_subtotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="htrans_beli">
+            <EntityTypeMapping TypeName="db_toko_alat_musikModel.htrans_beli">
+              <MappingFragment StoreEntitySet="htrans_beli">
+                <ScalarProperty Name="hb_id" ColumnName="hb_id" />
+                <ScalarProperty Name="hb_date" ColumnName="hb_date" />
+                <ScalarProperty Name="hb_invoice_number" ColumnName="hb_invoice_number" />
+                <ScalarProperty Name="hb_total" ColumnName="hb_total" />
+                <ScalarProperty Name="hb_customerid" ColumnName="hb_customerid" />
+                <ScalarProperty Name="hb_status" ColumnName="hb_status" />
+                <ScalarProperty Name="hb_employeeid" ColumnName="hb_employeeid" />
+                <ScalarProperty Name="hb_di_id" ColumnName="hb_di_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="htrans_service">
+            <EntityTypeMapping TypeName="db_toko_alat_musikModel.htrans_service">
+              <MappingFragment StoreEntitySet="htrans_service">
+                <ScalarProperty Name="hs_id" ColumnName="hs_id" />
+                <ScalarProperty Name="hs_date" ColumnName="hs_date" />
+                <ScalarProperty Name="hs_invoice_number" ColumnName="hs_invoice_number" />
+                <ScalarProperty Name="hs_total" ColumnName="hs_total" />
+                <ScalarProperty Name="hs_customerid" ColumnName="hs_customerid" />
+                <ScalarProperty Name="hs_status" ColumnName="hs_status" />
+                <ScalarProperty Name="hs_employeeid" ColumnName="hs_employeeid" />
+                <ScalarProperty Name="hs_di_id" ColumnName="hs_di_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="instruments">
+            <EntityTypeMapping TypeName="db_toko_alat_musikModel.instrument">
+              <MappingFragment StoreEntitySet="instrument">
+                <ScalarProperty Name="in_id" ColumnName="in_id" />
+                <ScalarProperty Name="in_name" ColumnName="in_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reviews">
+            <EntityTypeMapping TypeName="db_toko_alat_musikModel.review">
+              <MappingFragment StoreEntitySet="review">
+                <ScalarProperty Name="re_id" ColumnName="re_id" />
+                <ScalarProperty Name="re_description" ColumnName="re_description" />
+                <ScalarProperty Name="re_rating" ColumnName="re_rating" />
+                <ScalarProperty Name="re_al_id" ColumnName="re_al_id" />
+                <ScalarProperty Name="re_us_id" ColumnName="re_us_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="services">
+            <EntityTypeMapping TypeName="db_toko_alat_musikModel.service">
+              <MappingFragment StoreEntitySet="service">
+                <ScalarProperty Name="se_id" ColumnName="se_id" />
+                <ScalarProperty Name="se_name" ColumnName="se_name" />
+                <ScalarProperty Name="se_price" ColumnName="se_price" />
+                <ScalarProperty Name="se_sc_id" ColumnName="se_sc_id" />
+                <ScalarProperty Name="se_in_id" ColumnName="se_in_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="service_category">
+            <EntityTypeMapping TypeName="db_toko_alat_musikModel.service_category">
+              <MappingFragment StoreEntitySet="service_category">
+                <ScalarProperty Name="sc_id" ColumnName="sc_id" />
+                <ScalarProperty Name="sc_name" ColumnName="sc_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="db_toko_alat_musikModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="us_id" ColumnName="us_id" />
+                <ScalarProperty Name="us_name" ColumnName="us_name" />
+                <ScalarProperty Name="us_username" ColumnName="us_username" />
+                <ScalarProperty Name="us_password" ColumnName="us_password" />
+                <ScalarProperty Name="us_dateofbirth" ColumnName="us_dateofbirth" />
+                <ScalarProperty Name="us_status" ColumnName="us_status" />
+                <ScalarProperty Name="us_priv" ColumnName="us_priv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="variants">
+            <EntityTypeMapping TypeName="db_toko_alat_musikModel.variant">
+              <MappingFragment StoreEntitySet="variant">
+                <ScalarProperty Name="va_id" ColumnName="va_id" />
+                <ScalarProperty Name="va_al_id" ColumnName="va_al_id" />
+                <ScalarProperty Name="va_co_id" ColumnName="va_co_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

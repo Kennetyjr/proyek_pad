@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Validation;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
@@ -13,7 +14,7 @@ namespace proyekpad
 {
     public partial class Fkategori : Form
     {
-        proyekpadEntities ppad = new proyekpadEntities();
+        db_toko_alat_musikEntities db = new db_toko_alat_musikEntities();
         int idx = -1;
         string up = "";
         public Fkategori()
@@ -23,43 +24,62 @@ namespace proyekpad
 
         private void loaddgv()
         {
-            var ld = from k in ppad.CategoryProducts
+            var ld = from k in db.instruments
                      select new
                      {
-                         ID = k.ProductID,
-                         Nama_Kategori = k.Nama_Product,
+                         ID = k.in_id,
+                         Nama_Kategori = k.in_name,
                      };
             dataGridView1.DataSource = ld.ToList();
             var temp = dataGridView1.RowCount;
-            lbid.Text = "PID0"+(temp + 1).ToString();
+            lbid.Text = "IN0"+(temp + 1).ToString();
         }
 
         private void btnback_Click(object sender, EventArgs e)
         {
             Close();
-            Fmaster fm = new Fmaster();
-            fm.ShowDialog();
+          
         }
 
         private void btntambah_Click(object sender, EventArgs e)
         {
-            if(txtkategori.Text != "")
+            try
             {
-                CategoryProduct newkategori = new CategoryProduct()
+                if (txtkategori.Text != "")
                 {
-                    ProductID = lbid.Text,
-                    Nama_Product = txtkategori.Text
-                };
-                ppad.CategoryProducts.Add(newkategori);
-                ppad.SaveChanges();
-                loaddgv();
-                txtkategori.Text = "";
-                MessageBox.Show("Berhasil tambah kategori");
+                    instrument newinstru = new instrument()
+                    {
+                        in_id = lbid.Text,
+                        in_name = txtkategori.Text
+                    };
+                    db.instruments.Add(newinstru);
+                    db.SaveChanges();
+                    
+                    txtkategori.Text = "";
+                    MessageBox.Show("Berhasil tambah");
+                    loaddgv();
+                }
+                else
+                {
+                    MessageBox.Show("Isi semua field");
+                }
             }
-            else
+            catch (DbEntityValidationException ex)
             {
-                MessageBox.Show("Isi nama kategori");
+                foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in entityValidationErrors.ValidationErrors)
+                    {
+                        MessageBox.Show(
+                            $"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
+                    }
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
+            
         }
 
         private void Fkategori_Load(object sender, EventArgs e)
@@ -69,17 +89,19 @@ namespace proyekpad
 
         private void btnedit_Click(object sender, EventArgs e)
         {
-            CategoryProduct updt = ppad.CategoryProducts.FirstOrDefault(Category => Category.ProductID == up);
-            updt.ProductID = lbid.Text;
-            updt.Nama_Product = txtkategori.Text;
-            ppad.SaveChanges();
+            instrument updt = db.instruments.FirstOrDefault(intrum => intrum.in_id == up);
+            updt.in_id = lbid.Text;
+            updt.in_name = txtkategori.Text;
+            db.SaveChanges();
             idx = -1;
             up = "";
-            loaddgv();
-            MessageBox.Show("berhasil update kategori");
+            
+            MessageBox.Show("berhasil update");
             btnedit.Enabled = false;
             btntambah.Enabled = true;
             btnhapus.Enabled = false;
+            txtkategori.Text = "";
+            loaddgv();
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -106,13 +128,13 @@ namespace proyekpad
         {
             if (idx >= 0)
             {
-                CategoryProduct deleted = ppad.CategoryProducts.FirstOrDefault(Category => Category.ProductID == up);
+                instrument deleted = db.instruments.FirstOrDefault(Category => Category.in_id == up);
                
-                ppad.CategoryProducts.Remove(deleted);
-                ppad.SaveChanges();
+                db.instruments.Remove(deleted);
+                db.SaveChanges();
                 idx = -1;
                 up = "";
-                MessageBox.Show("Berhasil hapus kategori");
+                MessageBox.Show("Berhasil hapus");
                 lbid.Text = "";
                 txtkategori.Text = "";
                 btntambah.Enabled = true;

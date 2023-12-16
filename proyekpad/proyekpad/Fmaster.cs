@@ -28,18 +28,7 @@ namespace proyekpad
             fp.ShowDialog();
         }
 
-        private void entryPenjualanToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Frefill fr = new Frefill();
-            fr.ShowDialog();
-        }
-
-        private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-            Flogin fl = new Flogin();
-            fl.ShowDialog();
-        }
+      
 
         private void kategoriToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -59,10 +48,16 @@ namespace proyekpad
             fc.ShowDialog();
         }
 
-        private void pegawaiToolStripMenuItem_Click(object sender, EventArgs e)
+      
+
+        private void logOutToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            Fpegawai fp = new Fpegawai();
-            fp.ShowDialog();
+
+        }
+
+        private void masterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

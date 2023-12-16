@@ -40,6 +40,7 @@
             this.btntambah = new System.Windows.Forms.Button();
             this.btnbayar = new System.Windows.Forms.Button();
             this.btnhapus = new System.Windows.Forms.Button();
+            this.btnback = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudjumlah)).BeginInit();
             this.SuspendLayout();
@@ -151,11 +152,22 @@
             this.btnhapus.Text = "Hapus";
             this.btnhapus.UseVisualStyleBackColor = true;
             // 
+            // btnback
+            // 
+            this.btnback.Location = new System.Drawing.Point(1205, 15);
+            this.btnback.Name = "btnback";
+            this.btnback.Size = new System.Drawing.Size(75, 35);
+            this.btnback.TabIndex = 9;
+            this.btnback.Text = "Back";
+            this.btnback.UseVisualStyleBackColor = true;
+            this.btnback.Click += new System.EventHandler(this.btnback_Click);
+            // 
             // Fpenjualan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1301, 703);
+            this.Controls.Add(this.btnback);
             this.Controls.Add(this.btnbayar);
             this.Controls.Add(this.btnhapus);
             this.Controls.Add(this.btntambah);
@@ -192,6 +204,7 @@
         private System.Windows.Forms.Button btntambah;
         private System.Windows.Forms.Button btnbayar;
         private System.Windows.Forms.Button btnhapus;
+        private System.Windows.Forms.Button btnback;
     }
 }
 

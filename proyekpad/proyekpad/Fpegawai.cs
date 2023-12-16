@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace proyekpad
 {
@@ -147,6 +148,22 @@ namespace proyekpad
             {
                 MessageBox.Show("pilih data yang mau dihapus");
             }
+        }
+
+        private void txtemployeeid_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtnama_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            txtnama.Clear();    
+            txtemployeeid.Clear();  
         }
     }
 }

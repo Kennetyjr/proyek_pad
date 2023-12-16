@@ -21,5 +21,10 @@ namespace proyekpad
         {
 
         }
+
+        private void btnback_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

@@ -1,41 +1,153 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="proyekpadModelStoreContainer" CdmEntityContainer="proyekpadEntities">
-    <EntitySetMapping Name="CategoryProducts">
-      <EntityTypeMapping TypeName="proyekpadModel.CategoryProduct">
-        <MappingFragment StoreEntitySet="CategoryProduct">
-          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-          <ScalarProperty Name="Nama_Product" ColumnName="Nama_Product" />
+  <EntityContainerMapping StorageEntityContainer="db_toko_alat_musikModelStoreContainer" CdmEntityContainer="db_toko_alat_musikEntities">
+    <EntitySetMapping Name="alatmusiks">
+      <EntityTypeMapping TypeName="db_toko_alat_musikModel.alatmusik">
+        <MappingFragment StoreEntitySet="alatmusik">
+          <ScalarProperty Name="al_id" ColumnName="al_id" />
+          <ScalarProperty Name="al_name" ColumnName="al_name" />
+          <ScalarProperty Name="al_description" ColumnName="al_description" />
+          <ScalarProperty Name="al_price" ColumnName="al_price" />
+          <ScalarProperty Name="al_stock" ColumnName="al_stock" />
+          <ScalarProperty Name="al_status" ColumnName="al_status" />
+          <ScalarProperty Name="al_br_id" ColumnName="al_br_id" />
+          <ScalarProperty Name="al_in_id" ColumnName="al_in_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Customers">
-      <EntityTypeMapping TypeName="proyekpadModel.Customer">
-        <MappingFragment StoreEntitySet="Customer">
-          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-          <ScalarProperty Name="Nama_Customer" ColumnName="Nama_Customer" />
-          <ScalarProperty Name="Customer_Address" ColumnName="Customer_Address" />
-          <ScalarProperty Name="Nomor_Telpon" ColumnName="Nomor_Telpon" />
+    <EntitySetMapping Name="brands">
+      <EntityTypeMapping TypeName="db_toko_alat_musikModel.brand">
+        <MappingFragment StoreEntitySet="brand">
+          <ScalarProperty Name="br_id" ColumnName="br_id" />
+          <ScalarProperty Name="br_name" ColumnName="br_name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Employees">
-      <EntityTypeMapping TypeName="proyekpadModel.Employee">
-        <MappingFragment StoreEntitySet="Employee">
-          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-          <ScalarProperty Name="Nama_Employee" ColumnName="Nama_Employee" />
-          <ScalarProperty Name="Password_Employee" ColumnName="Password_Employee" />
-          <ScalarProperty Name="Gender" ColumnName="Gender" />
+    <EntitySetMapping Name="colors">
+      <EntityTypeMapping TypeName="db_toko_alat_musikModel.color">
+        <MappingFragment StoreEntitySet="color">
+          <ScalarProperty Name="co_id" ColumnName="co_id" />
+          <ScalarProperty Name="co_name" ColumnName="co_name" />
+          <ScalarProperty Name="co_hex" ColumnName="co_hex" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Products">
-      <EntityTypeMapping TypeName="proyekpadModel.Product">
-        <MappingFragment StoreEntitySet="Product">
-          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-          <ScalarProperty Name="Namaproduct" ColumnName="Namaproduct" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="stock" ColumnName="stock" />
+    <EntitySetMapping Name="discounts">
+      <EntityTypeMapping TypeName="db_toko_alat_musikModel.discount">
+        <MappingFragment StoreEntitySet="discount">
+          <ScalarProperty Name="di_id" ColumnName="di_id" />
+          <ScalarProperty Name="di_nama" ColumnName="di_nama" />
+          <ScalarProperty Name="di_value" ColumnName="di_value" />
+          <ScalarProperty Name="di_type" ColumnName="di_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="dtrans_beli">
+      <EntityTypeMapping TypeName="db_toko_alat_musikModel.dtrans_beli">
+        <MappingFragment StoreEntitySet="dtrans_beli">
+          <ScalarProperty Name="db_id" ColumnName="db_id" />
+          <ScalarProperty Name="db_va_id" ColumnName="db_va_id" />
+          <ScalarProperty Name="db_amount" ColumnName="db_amount" />
+          <ScalarProperty Name="db_hb_id" ColumnName="db_hb_id" />
+          <ScalarProperty Name="db_subtotal" ColumnName="db_subtotal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="dtrans_service">
+      <EntityTypeMapping TypeName="db_toko_alat_musikModel.dtrans_service">
+        <MappingFragment StoreEntitySet="dtrans_service">
+          <ScalarProperty Name="ds_id" ColumnName="ds_id" />
+          <ScalarProperty Name="ds_se_id" ColumnName="ds_se_id" />
+          <ScalarProperty Name="ds_hs_id" ColumnName="ds_hs_id" />
+          <ScalarProperty Name="ds_subtotal" ColumnName="ds_subtotal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="htrans_beli">
+      <EntityTypeMapping TypeName="db_toko_alat_musikModel.htrans_beli">
+        <MappingFragment StoreEntitySet="htrans_beli">
+          <ScalarProperty Name="hb_id" ColumnName="hb_id" />
+          <ScalarProperty Name="hb_date" ColumnName="hb_date" />
+          <ScalarProperty Name="hb_invoice_number" ColumnName="hb_invoice_number" />
+          <ScalarProperty Name="hb_total" ColumnName="hb_total" />
+          <ScalarProperty Name="hb_customerid" ColumnName="hb_customerid" />
+          <ScalarProperty Name="hb_status" ColumnName="hb_status" />
+          <ScalarProperty Name="hb_employeeid" ColumnName="hb_employeeid" />
+          <ScalarProperty Name="hb_di_id" ColumnName="hb_di_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="htrans_service">
+      <EntityTypeMapping TypeName="db_toko_alat_musikModel.htrans_service">
+        <MappingFragment StoreEntitySet="htrans_service">
+          <ScalarProperty Name="hs_id" ColumnName="hs_id" />
+          <ScalarProperty Name="hs_date" ColumnName="hs_date" />
+          <ScalarProperty Name="hs_invoice_number" ColumnName="hs_invoice_number" />
+          <ScalarProperty Name="hs_total" ColumnName="hs_total" />
+          <ScalarProperty Name="hs_customerid" ColumnName="hs_customerid" />
+          <ScalarProperty Name="hs_status" ColumnName="hs_status" />
+          <ScalarProperty Name="hs_employeeid" ColumnName="hs_employeeid" />
+          <ScalarProperty Name="hs_di_id" ColumnName="hs_di_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="instruments">
+      <EntityTypeMapping TypeName="db_toko_alat_musikModel.instrument">
+        <MappingFragment StoreEntitySet="instrument">
+          <ScalarProperty Name="in_id" ColumnName="in_id" />
+          <ScalarProperty Name="in_name" ColumnName="in_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reviews">
+      <EntityTypeMapping TypeName="db_toko_alat_musikModel.review">
+        <MappingFragment StoreEntitySet="review">
+          <ScalarProperty Name="re_id" ColumnName="re_id" />
+          <ScalarProperty Name="re_description" ColumnName="re_description" />
+          <ScalarProperty Name="re_rating" ColumnName="re_rating" />
+          <ScalarProperty Name="re_al_id" ColumnName="re_al_id" />
+          <ScalarProperty Name="re_us_id" ColumnName="re_us_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="services">
+      <EntityTypeMapping TypeName="db_toko_alat_musikModel.service">
+        <MappingFragment StoreEntitySet="service">
+          <ScalarProperty Name="se_id" ColumnName="se_id" />
+          <ScalarProperty Name="se_name" ColumnName="se_name" />
+          <ScalarProperty Name="se_price" ColumnName="se_price" />
+          <ScalarProperty Name="se_sc_id" ColumnName="se_sc_id" />
+          <ScalarProperty Name="se_in_id" ColumnName="se_in_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="service_category">
+      <EntityTypeMapping TypeName="db_toko_alat_musikModel.service_category">
+        <MappingFragment StoreEntitySet="service_category">
+          <ScalarProperty Name="sc_id" ColumnName="sc_id" />
+          <ScalarProperty Name="sc_name" ColumnName="sc_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="db_toko_alat_musikModel.user">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="us_id" ColumnName="us_id" />
+          <ScalarProperty Name="us_name" ColumnName="us_name" />
+          <ScalarProperty Name="us_username" ColumnName="us_username" />
+          <ScalarProperty Name="us_password" ColumnName="us_password" />
+          <ScalarProperty Name="us_dateofbirth" ColumnName="us_dateofbirth" />
+          <ScalarProperty Name="us_status" ColumnName="us_status" />
+          <ScalarProperty Name="us_priv" ColumnName="us_priv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="variants">
+      <EntityTypeMapping TypeName="db_toko_alat_musikModel.variant">
+        <MappingFragment StoreEntitySet="variant">
+          <ScalarProperty Name="va_id" ColumnName="va_id" />
+          <ScalarProperty Name="va_al_id" ColumnName="va_al_id" />
+          <ScalarProperty Name="va_co_id" ColumnName="va_co_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

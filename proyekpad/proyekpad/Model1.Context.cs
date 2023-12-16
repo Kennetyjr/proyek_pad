@@ -13,10 +13,10 @@ namespace proyekpad
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class proyekpadEntities : DbContext
+    public partial class db_toko_alat_musikEntities : DbContext
     {
-        public proyekpadEntities()
-            : base("name=proyekpadEntities")
+        public db_toko_alat_musikEntities()
+            : base("name=db_toko_alat_musikEntities")
         {
         }
     
@@ -25,9 +25,19 @@ namespace proyekpad
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CategoryProduct> CategoryProducts { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<alatmusik> alatmusiks { get; set; }
+        public virtual DbSet<brand> brands { get; set; }
+        public virtual DbSet<color> colors { get; set; }
+        public virtual DbSet<discount> discounts { get; set; }
+        public virtual DbSet<dtrans_beli> dtrans_beli { get; set; }
+        public virtual DbSet<dtrans_service> dtrans_service { get; set; }
+        public virtual DbSet<htrans_beli> htrans_beli { get; set; }
+        public virtual DbSet<htrans_service> htrans_service { get; set; }
+        public virtual DbSet<instrument> instruments { get; set; }
+        public virtual DbSet<review> reviews { get; set; }
+        public virtual DbSet<service> services { get; set; }
+        public virtual DbSet<service_category> service_category { get; set; }
+        public virtual DbSet<user> users { get; set; }
+        public virtual DbSet<variant> variants { get; set; }
     }
 }
